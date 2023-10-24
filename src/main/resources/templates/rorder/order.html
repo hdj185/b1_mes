@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <!-- Custom fonts for this template-->
+    <script src="https://kit.fontawesome.com/8d5fe92c5f.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+          rel="stylesheet">
+    <!--  swal  -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- Custom styles for this template-->
+    <link href="/css/css.css" rel="stylesheet">
+    <title>수주 관리</title>
+</head>
+
+<body id="page-top">
+
+<!-- Page Wrapper -->
+<div id="wrapper">
+
+    <!-- Sidebar -->
+    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+        <!-- Sidebar - Brand -->
+        <a class="sidebar-brand d-flex align-items-center justify-content-center" id="sidebarBrandTexts"
+           href="/main">
+            <div class="sidebar-brand-icons">
+                <i class="fa-solid fa-industry fa-2x" id="brandLogo"></i>
+            </div>
+            <div class="sidebar-brand-text mx-4">
+                <div class="sidebarBrandTexts">제1조 MES</div>
+            </div>
+        </a>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider my-3">
+
+        <!-- Nav Item - 수주관리 -->
+        <li class="nav-item active">
+            <a class="nav-link" href="/rorder/order">
+                <i class="fa-solid fa-wallet"></i>
+                <span>수주관리</span></a>
+        </li>
+
+        <!-- Nav Item - 자재관리 -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOne"
+               aria-expanded="true" aria-controls="collapseOne">
+                <i class="fa-solid fa-pen-to-square"></i>
+                <span>자재관리</span>
+            </a>
+            <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <a class="collapse-item" href="/materials/porder-status">· 발주 현황</a>
+                    <a class="collapse-item" href="/materials/material-inoutput">· 자재 입·출 현황</a>
+                    <a class="collapse-item" href="/materials/material-inventory">· 자재 재고 현황</a>
+                </div>
+            </div>
+        </li>
+
+        <!-- Nav Item - 생산관리 -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+               aria-expanded="true" aria-controls="collapseTwo">
+                <i class="fa-solid fa-clipboard"></i>
+                <span>생산관리</span>
+            </a>
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <a class="collapse-item" href="/production/production-plan">· 작업 계획 현황</a>
+                    <a class="collapse-item" href="/production/production-order">· 작업 지시 현황</a>
+                    <a class="collapse-item" href="/production/production-performance">· 작업 실적 현황</a>
+                </div>
+            </div>
+        </li>
+
+        <!-- Nav Item - 출하관리 -->
+        <li class="nav-item">
+            <a class="nav-link" href="/shipment/shipment">
+                <i class="fa-solid fa-chart-simple"></i>
+                <span>출하관리</span>
+            </a>
+        </li>
+
+        <!-- Nav Item - 거래처관리 -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThree"
+               aria-expanded="true" aria-controls="collapseThree">
+                <i class="fa-solid fa-user-group"></i>
+                <span>거래처관리</span>
+            </a>
+            <div id="collapseThree" class="collapse" aria-labelledby="HeadingThree" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <a class="collapse-item" href="/customer/rorder-customer">· 수주 거래처 현황</a>
+                    <a class="collapse-item" href="/customer/porder-customer">· 발주 거래처 현황</a>
+                </div>
+            </div>
+        </li>
+
+        <!-- Nav Item - 품목관리 -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFour"
+               aria-expanded="true" aria-controls="collapseFour">
+                <i class="fa-solid fa-chart-bar"></i>
+                <span>품목관리</span>
+            </a>
+            <div id="collapseFour" class="collapse" aria-labelledby="HeadingFour" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <a class="collapse-item" href="/item/product">· 제품 재고 현황</a>
+                    <a class="collapse-item" href="/item/bom">· BOM 현황</a>
+                </div>
+            </div>
+        </li>
+
+        <!-- Nav Item - 설비관리 -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFive"
+               aria-expanded="true" aria-controls="collapseFive">
+                <i class="fa-solid fa-gear"></i>
+                <span>설비관리</span>
+            </a>
+            <div id="collapseFive" class="collapse" aria-labelledby="HeadingFive" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <a class="collapse-item" href="/facility/facility-status">· 설비 현황</a>
+                    <a class="collapse-item" href="/facility/facility-information">· 설비 정보</a>
+                </div>
+            </div>
+        </li>
+
+        <!-- Nav Item - LOT 관리 -->
+        <li class="nav-item">
+            <a class="nav-link" href="/lot/lot">
+                <i class="fa-solid fa-repeat"></i>
+                <span>LOT 관리</span>
+            </a>
+        </li>
+
+        <!-- Sidebar Toggler (Sidebar) -->
+        <div class="text-center-toggle">
+            <button class="rounded-circle border-0" id="sidebarToggle"></button>
+        </div>
+
+    </ul>
+    <!-- End of Sidebar -->
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+        <!-- Main Content -->
+        <div id="content">
+            <!-- Topbar -->
+            <div class="topbar">
+                <h1 class="h4">수주관리</h1>
+                <div class="buttons">
+                    <!-- 등록 -->
+                    <button class="buttonsReg" id="openModalBtn">등록</button>
+                    <div class="modal" id="myModal">
+                        <div class="modalContentReg">
+                            <div class="regTop">
+                                <p class="regTitle">수주 등록</p>
+                                <div class="regButton">
+                                    <button class="regReg" id="regBtn">등록</button>
+                                    <button class="regClose">닫기</button>
+                                </div>
+                            </div>
+
+                            <!-- regSearchbar -->
+                            <form id="regform">
+                                <div class="regSearchbar">
+                                    <table class="table table-borderless" id="orderDataTable1" width="100%"
+                                           cellspacing="0">
+                                        <tr class="regSearchbarTr1">
+                                            <input type="hidden" id="regPrice">
+                                            <td class="regSearchbarDateTd">
+                                                <p>수주일</p>
+                                            </td>
+                                            <td class="regSearchbarContent">
+                                                <!--                                                <input type="text" id="regOrderCurrentTimeInput" readonly/>-->
+                                                <input type="datetime-local" id="regOrderCurrentTimeInput"
+                                                       name="orderDate">
+                                            </td>
+                                            <td class="regSearchbarDateTd">
+                                                <p>수주 번호</p>
+                                            </td>
+                                            <td class="regSearchbarContent">
+                                                <input type="text" disabled/>
+                                            </td>
+                                            <td class="regSearchbarDateTd">
+                                                <p>거래처명</p>
+                                            </td>
+                                            <td class="regSearchbarContent">
+                                                <select class="regSearchbarSelect" name="customerId" id="regCustomerId">
+                                                    <option th:each="customer : ${customerList}"
+                                                            th:text="${customer.name}"
+                                                            th:value="${customer.id}"></option>
+                                                </select>
+                                                <input id="hiddenRegCustomer" type="hidden"
+                                                       th:value="${customerList.get(0).name}">
+                                            </td>
+                                            <td class="regSearchbarButton">
+                                                <!-- 공백 -->
+                                            </td>
+                                        </tr>
+                                        <tr class="regSearchbarTr2">
+                                            <td class="regSearchbarDateTd">
+                                                <p>품목</p>
+                                            </td>
+                                            <td class="regSearchbarContent">
+                                                <select class="regSearchbarSelect" name="productId" id="regProductId">
+                                                    <option th:each="product : ${productList}" th:text="${product.name}"
+                                                            th:value="${product.id}" th:data-price="${product.price}" th:data-sort="${product.sort}"></option>
+                                                </select>
+                                                <input id="hiddenRegProduct" type="hidden"
+                                                       th:value="${productList.get(0).name}">
+                                            </td>
+                                            <td class="regSearchbarDateTd">
+                                                <p>수주량</p>
+                                            </td>
+                                            <td class="regSearchbarContent">
+                                                <input type="text" name="orderCnt" id="regOrderCnt">
+                                            </td>
+                                            <td class="regSearchbarDateTd">
+                                                <p>납품예정일</p>
+                                            </td>
+                                            <td class="regSearchbarContent">
+                                                <input type="text" id="regDeliveryDate" name="deliveryDate" readonly/>
+                                            </td>
+                                            <td class="regSearchbarButton">
+                                                <button type="button" class="regSearchbarPreButton"
+                                                        id="regSearchbarPreButton">
+                                                    <p class="regSearchbarPreButtonP">예측</p>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </form>
+                            <!-- regSearchbar 끝 -->
+
+                            <!-- regCardBody -->
+                            <div class="regCardBody">
+                                <div class="table-responsive">
+                                    <table class="table table-borderless" id="orderDataTables1" width="100%"
+                                           cellspacing="0">
+                                        <thead class="tableTitle">
+                                        <tr>
+                                            <th>품목명</th>
+                                            <th>품목코드</th>
+                                            <th>수량</th>
+                                            <th>단가(원)</th>
+                                            <th>분류</th>
+                                            <th>총금액</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody class="tableBody">
+                                        <tr>
+                                            <td id="regTableProductName" th:text="${productList.get(0).name}">양배추즙</td>
+                                            <td id="regTableProductCode" th:text="${productList.get(0).id}">01513448</td>
+                                            <td id="regTableCnt">0</td>
+                                            <td id="regTableProductPrice" th:text="${productList.get(0).price}">9,000</td>
+                                            <td id="regTableProductSort" th:text="${productList.get(0).sort}">JUICE</td>
+                                            <td id="regTableSum">0</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <!-- regCardBody 끝 -->
+                        </div>
+                    </div>
+                    <!-- 등록 끝 -->
+
+                    <!-- 수정 -->
+                    <button class="buttonsCor" id="editModalBtn">수정</button>
+                    <div class="modal" id="editModal">
+                        <div class="modalContentReg">
+                            <div class="regTop">
+                                <p class="regTitle">수주 수정</p>
+                                <div class="regButton">
+                                    <button class="regReg" id="editBtn">수정</button>
+                                    <button class="editClose">닫기</button>
+                                </div>
+                            </div>
+
+                            <!-- regSearchbar -->
+                            <form id="editform">
+                                <div class="regSearchbar">
+                                    <input type="hidden" id="editPrice">
+                                    <table class="table table-borderless" id="orderDataTable2" width="100%"
+                                           cellspacing="0">
+                                        <tr class="regSearchbarTr1">
+                                            <td class="regSearchbarDateTd">
+                                                <p>수주일</p>
+                                            </td>
+                                            <td class="regSearchbarContent">
+                                                <input type="datetime-local" id="editOrderCurrentTimeInput">
+                                            </td>
+                                            <td class="regSearchbarDateTd">
+                                                <p>수주 번호</p>
+                                            </td>
+                                            <td class="regSearchbarContent">
+                                                <input type="text" id="editId" disabled/>
+                                            </td>
+                                            <td class="regSearchbarDateTd">
+                                                <p>거래처명</p>
+                                            </td>
+                                            <td class="regSearchbarContent">
+                                                <select class="regSearchbarSelect" name="customerId"
+                                                        id="editCustomerId">
+                                                    <option th:each="customer : ${customerList}"
+                                                            th:text="${customer.name}"
+                                                            th:value="${customer.id}"></option>
+                                                </select>
+                                                <input id="hiddenEditCustomer" type="hidden"
+                                                       th:value="${customerList.get(0).name}">
+                                            </td>
+                                            <td class="regSearchbarButton">
+                                                <!-- 공백 -->
+                                            </td>
+                                        </tr>
+                                        <tr class="regSearchbarTr2">
+                                            <td class="regSearchbarDateTd">
+                                                <p>품목</p>
+                                            </td>
+                                            <td class="regSearchbarContent">
+                                                <select class="regSearchbarSelect" id="editProductId">
+                                                    <option th:each="product : ${productList}" th:text="${product.name}" th:value="${product.id}"
+                                                    th:data-price="${product.price}" th:data-sort="${product.sort}"></option>
+                                                </select>
+                                                <input id="hiddenEditProduct" type="hidden"
+                                                       th:value="${productList.get(0).name}">
+                                            </td>
+                                            <td class="regSearchbarDateTd">
+                                                <p>수주량</p>
+                                            </td>
+                                            <td class="regSearchbarContent">
+                                                <input type="text" id="editOrderCnt">
+                                            </td>
+                                            <td class="regSearchbarDateTd">
+                                                <p>납품예정일</p>
+                                            </td>
+                                            <td class="regSearchbarContent">
+                                                <input type="text" id="editDeliveryDate" readonly/>
+                                            </td>
+                                            <td class="regSearchbarButton">
+                                                <button class="regSearchbarPreButton" id="editSearchbarPreButton">
+                                                    <p class="regSearchbarPreButtonP">예측</p>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </form>
+                            <!-- regSearchbar 끝 -->
+
+                            <!-- regCardBody -->
+                            <div class="regCardBody">
+                                <div class="table-responsive">
+                                    <table class="table table-borderless" id="orderDataTable3" width="100%"
+                                           cellspacing="0">
+                                        <thead class="tableTitle">
+                                        <tr>
+                                            <th>품목명</th>
+                                            <th>품목코드</th>
+                                            <th>수량</th>
+                                            <th>단가(원)</th>
+                                            <th>분류</th>
+                                            <th>총금액</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody class="tableBody">
+                                        <tr>
+                                            <td id="editTableProductName" th:text="${productList.get(0).name}">양배추즙</td>
+                                            <td id="editTableProductCode" th:text="${productList.get(0).id}">01513448</td>
+                                            <td id="editTableCnt">0</td>
+                                            <td id="editTableProductPrice" th:text="${productList.get(0).price}">9,000</td>
+                                            <td id="editTableProductSort" th:text="${productList.get(0).sort}">JUICE</td>
+                                            <td id="editTableSum">0</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <!-- regCardBody 끝 -->
+                        </div>
+                    </div>
+                    <!-- 수정 끝 -->
+                    <button class="buttonsChe" id="confirmedButton">확정</button>
+                    <button class="buttonsEx" id="orderDownloadExcel">엑셀다운로드</button>
+                </div>
+            </div>
+            <!-- End of Topbar -->
+
+            <!-- searchbar  -->
+            <form th:action="@{/rorder/order}" methbod="get" class="searchbarForm">
+                <div class="searchbar">
+                    <table class="table table-borderless" id="orderDataTable4" cellspacing="0">
+                        <tr class="searchbarTr1">
+                            <td class="searchbarDateTd">
+                                <p>수주일자</p>
+                            </td>
+                            <td class="searchbarContent">
+                                <div class="searchbarDate">
+                                    <input type="date" name="startDate" th:value="${startDate}">
+                                    <p class="searchbarDateWater">~</p>
+                                    <input type="date" name="endDate" th:value="${endDate}">
+                                </div>
+                            <td class="searchbarDateTd">
+                                <p>수주번호</p>
+                            </td>
+                            <td class="searchbarContent">
+                                <input type="text" name="orderId" th:value="${orderId}">
+                            </td>
+                            <td class="searchbarDateTd">
+                                <p>진행상태</p>
+                            </td>
+                            <td class="searchbarContent">
+                                <select class="searchbarSelect" name="status">
+                                    <option value="" th:selected="${status == '' or status == null}">선택</option>
+                                    <option value="진행전" th:selected="${status == '진행전'}">진행전</option>
+                                    <option value="진행중" th:selected="${status == '진행중'}">진행중</option>
+                                    <option value="완료" th:selected="${status == '완료'}">완료</option>
+                                </select>
+                            </td>
+                            <td class="searchButtonTd"></td>
+                        </tr>
+                        <tr class="searchbarTr2">
+                            <td class="searchbarDateTd">
+                                <p>거래처명</p>
+                            </td>
+                            <td class="searchbarContent">
+                                <select class="searchbarSelect" name="customerName">
+                                    <option value="" th:selected="${customerName == '' or customerName == null}">선택
+                                    </option>
+                                    <option th:each="customer : ${customerList}" th:text="${customer.name}"
+                                            th:value="${customer.name}"
+                                            th:selected="${customerName == customer.name}"></option>
+                                </select>
+                            </td>
+                            <td class="searchbarDateTd">
+                                <p>품목</p>
+                            </td>
+                            <td class="searchbarContent">
+                                <select class="searchbarSelect" name="productName">
+                                    <option value="" th:selected="${productName == '' or productName == null}">선택
+                                    </option>
+                                    <option th:each="product : ${productList}" th:text="${product.name}"
+                                            th:value="${product.name}"
+                                            th:selected="${productName == product.name}"></option>
+                                </select>
+                            </td>
+                            <td class="searchbarDateTd">
+                                <p>납품예정일</p>
+                            </td>
+                            <td class="searchbarContent">
+                                <div class="searchbarDate">
+                                    <input type="date" name="startDeadline" th:value="${startDeadline}">
+                                    <p class="searchbarDateWater">~</p>
+                                    <input type="date" name="endDeadline" th:value="${endDeadline}">
+                                </div>
+                            </td>
+                            <td class="searchButtonTd">
+                                <button class="searchButton" type="submit">
+                                    <i class="fa-solid fa-magnifying-glass"></i>
+                                    <p class="searchButtonP">조회</p>
+                                </button>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </form>
+            <!-- searchbar끝 -->
+
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+
+                <!-- DataTales Example -->
+                <div class="cardBody">
+                    <div class="table-responsive" style="overflow: auto; max-height: 800px;">
+                        <table class="table table-borderless" id="orderDataTables3">
+                            <thead class="tableTitle">
+                            <tr>
+                                <th></th>
+                                <th>수주일자</th>
+                                <th>수주번호</th>
+                                <th>진행사항</th>
+                                <th>거래처명</th>
+                                <th>품목명</th>
+                                <th>납품예정일</th>
+                                <th>수주량</th>
+                                <th>수주 금액</th>
+                            </tr>
+                            </thead>
+                            <!--  리스트 내용 영역 시작  -->
+                            <form id="confirmedForm" action="/rorder/confirmed" method="post">
+                                <tbody class="tableBody">
+                                <tr th:each="rorder : ${rorderList}">
+                                    <td><input type="checkbox" th:value="${rorder.id}" name="selectedIds"
+                                               th:if="${rorder.state == '진행전'}">
+                                        <input type="checkbox" th:if="${rorder.state != '진행전'}" disabled></td>
+                                    <td class="date-cell" th:text="${rorder.date}">2022-05-01 11:30</td>
+                                    <td th:text="${rorder.id}">G215483126</td>
+                                    <td th:text="${rorder.state}">진행전</td>
+                                    <td th:text="${rorder.customerName}">매출처1</td>
+                                    <td th:text="${rorder.productName}">양배추즙</td>
+                                    <td th:text="${rorder.deadline}">2022-05-01 11:30</td>
+                                    <td th:text="${rorder.cnt}">50</td>
+                                    <td th:text="${rorder.price}">1,000,000,000</td>
+                                </tr>
+                                </tbody>
+                            </form>
+                            <!--  리스트 내용 영역 끝  -->
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!-- /.container-fluid -->
+        </div>
+        <!-- End of Main Content -->
+    </div>
+    <!-- End of Content Wrapper -->
+
+</div>
+<!-- End of Page Wrapper -->
+
+</div>
+<!-- End of Page Wrapper -->
+
+
+<!-- 작성 스크립트-->
+<script src="/js/buttons/orderRegistration.js"></script>
+<script src="/js/buttons/orderCorrection.js"></script>
+<script src="/js/excel/orderExcel.js"></script>
+<script src="/js/buttons/confirmed.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+<script src="/js/buttons/preButton.js"></script>
+
+<!-- Bootstrap core JavaScript-->
+<script src="/js/jquery.min.js"></script>
+<script src="/js/bootstrap.bundle.min.js"></script>
+
+<!-- Core plugin JavaScript-->
+<script src="/js/jquery.easing.min.js"></script>
+
+<!-- Custom scripts for all pages-->
+<script src="/js/sb-admin-2.min.js"></script>
+
+<!-- Page level plugins -->
+<script src="/js/Chart.min.js"></script>
+
+<script>
+    function simulationFuntion(orderTimeInput, productId, orderCnt, deliveryDateId) {
+
+        // form에서 필요한 값 가져오기
+        var orderDate = $(orderTimeInput).val();
+        var productId = $(productId).val();
+        var orderCnt = $(orderCnt).val();
+        var numberCheck = /^[0-9]+$/;
+
+        if (orderCnt == '')
+            alert("수주량을 입력해주세요.");
+        else if (!numberCheck.test(orderCnt))
+            alert("수주량은 숫자만 입력 가능합니다.");
+        else {
+            // AJAX 요청 보내기
+            $.ajax({
+                url: '/rorder/simulation',
+                method: 'POST',
+                data: {
+                    orderDate: orderDate,
+                    productId: productId,
+                    orderCnt: orderCnt
+                },
+                success: function (response) {
+                    console.log('통신결과');
+                    // 응답 데이터에서 시뮬레이션 날짜 가져오기
+                    var deliveryDate = response.deliveryDate;
+                    console.log('orderDate:', orderDate);
+                    console.log('productId:', productId);
+                    console.log('orderCnt:', orderCnt);
+                    console.log('deliveryDate:', deliveryDate);
+                    // 시뮬레이션 날짜를 deliveryDate 클래스를 가진 input 엘리먼트에 설정
+                    $(deliveryDateId).val(deliveryDate);
+                },
+                error: function (error) {
+                    // 오류 처리
+                    console.error('-----------------AJAX 요청 실패:', error);
+                }
+            });
+        }
+    }
+
+    //등록 예측 버튼 클릭 이벤트 핸들러
+    $('#regSearchbarPreButton').on('click', function (event) {
+        event.preventDefault();
+        simulationFuntion('#regOrderCurrentTimeInput', '#regProductId', '#regOrderCnt', '#regDeliveryDate');
+    });
+
+    //수정 예측 버튼 클릭 이벤트 핸들러
+    $('#editSearchbarPreButton').on('click', function (event) {
+        event.preventDefault();
+        simulationFuntion('#editOrderCurrentTimeInput', '#editProductId', '#editOrderCnt', '#editDeliveryDate');
+    })
+
+    ////hidden 등록 input
+    // 선택된 옵션의 customer.Name 값을 hiddenRegCustomer에 설정
+    $('#regCustomerId').on('change', function () {
+        var selectedOption = $(this).find('option:selected');
+        var customerName = selectedOption.text();
+        $('#hiddenRegCustomer').val(customerName);
+        console.log('customerName:', customerName);
+    });
+
+
+    // 선택된 옵션의 productName 값을 hiddenRegProduct 설정
+    $('#editProductId').on('change', function () {
+        var selectedOption = $(this).find('option:selected');
+        var productName = selectedOption.text();
+        $('#hiddenEditProduct').val(productName);
+        console.log('productName:', productName);
+    });
+
+    ////hidden 수정 input
+    // 선택된 옵션의 customer.Name 값을 hiddenRegCustomer에 설정
+    $('#editCustomerId').on('change', function () {
+        var selectedOption = $(this).find('option:selected');
+        var customerName = selectedOption.text();
+        $('#hiddenEditCustomer').val(customerName);
+        console.log('customerName:', customerName);
+    });
+
+    // 선택된 옵션의 productName 값을 hiddenRegProduct 설정
+    $('#regProductId').on('change', function () {
+        var selectedOption = $(this).find('option:selected');
+        var productName = selectedOption.text();
+        var productId = selectedOption.val();
+        var productPrice = selectedOption.data('price');
+        var productSort = selectedOption.data('sort');
+        var productCnt = parseInt($('#regOrderCnt').val().replace(/,/g, ''));
+        if(isNaN(productCnt))
+            productCnt = 0;
+
+        $('#hiddenRegProduct').val(productName);
+        $('#regTableProductName').text(productName);    //테이블 품목 이름 변동
+        $('#regTableProductCode').text(productId);      //테이블 품목 코드 변동
+        $('#regTableProductPrice').text(productPrice);  //테이블 품목 단가(원) 변동
+        $('#regTableProductSort').text(productSort);    //테이블 품목 분류 변동
+        $('#regTableSum').text(productCnt * parseInt(productPrice));
+        console.log('productName:', productName);
+    });
+
+    // 선택된 옵션의 productName 값을 hiddenRegProduct 설정
+    $('#editProductId').on('change', function() {
+        var selectedOption = $(this).find('option:selected');
+        var productName = selectedOption.text();
+        var productId = selectedOption.val();
+        var productPrice = selectedOption.data('price');
+        var productSort = selectedOption.data('sort');
+        var productCnt = parseInt($('#editOrderCnt').val().replace(/,/g, ''));
+        if(isNaN(productCnt))
+            productCnt = 0;
+
+        $('#hiddenEditProduct').val(productName);
+        $('#editTableProductName').text(productName);    //테이블 품목 이름 변동
+        $('#editTableProductCode').text(productId);      //테이블 품목 코드 변동
+        $('#editTableProductPrice').text(productPrice);  //테이블 품목 단가(원) 변동
+        $('#editTableProductSort').text(productSort);    //테이블 품목 분류 변동
+        $('#editTableSum').text(productCnt * parseInt(productPrice));
+    });
+
+    // 수주량 변동에 따라 테이블에 값 지정
+    $('#regOrderCnt').on('input', function () {
+        var selectedOption = $('#regProductId option:selected');
+        var productPrice = selectedOption.data('price');
+        var productCnt = parseInt($('#regOrderCnt').val().replace(/,/g, ''));
+        if(isNaN(productCnt))
+            productCnt = 0;
+
+        $('#regPrice').val(productCnt * parseInt(productPrice));
+        $('#regOrderCnt').text(productCnt);    //테이블 수량 변동
+        $('#regTableSum').text(productCnt * parseInt(productPrice));    //총 금액 변동
+    });
+
+    // 수주량 변동에 따라 테이블에 값 지정
+    $('#editOrderCnt').on('input', function () {
+        var selectedOption = $('#editProductId option:selected');
+        var productPrice = selectedOption.data('price');
+        var productCnt = parseInt($('#editOrderCnt').val().replace(/,/g, ''));
+        if(isNaN(productCnt))
+            productCnt = 0;
+
+        $('#editPrice').val(productCnt * parseInt(productPrice));
+        $('#editOrderCnt').text(productCnt);    //테이블 수량 변동
+        $('#editTableSum').text(productCnt * parseInt(productPrice));    //총 금액 변동
+    });
+
+    //수주 등록 버튼 이벤트 핸들러
+    $('#regBtn').on('click', function (event) {
+        event.preventDefault();
+        sendData('',
+            '#regOrderCurrentTimeInput',
+            '#regCustomerId',
+            '#hiddenRegCustomer',
+            '#regProductId',
+            '#hiddenRegProduct',
+            '#regOrderCnt',
+            '#regPrice',
+            '#regDeliveryDate',
+            '/rorder/reg');
+    });
+
+    $('#editBtn').on('click', function (event) {
+        event.preventDefault();
+        sendData('#editId',
+            '#editOrderCurrentTimeInput',
+            '#editCustomerId',
+            '#hiddenEditCustomer',
+            '#editProductId',
+            '#hiddenEditProduct',
+            '#editOrderCnt',
+            '#editPrice',
+            '#editDeliveryDate',
+            '/rorder/edit');
+    });
+
+
+    function sendData(rorderId,
+                      orderDateInput,
+                      customerIdInput,
+                      customerNameInput,
+                      productIdInput,
+                      productNameInput,
+                      orderCntInput,
+                      orderPriceInput,
+                      deliveryDateInput,
+                      requestUrl) {
+        // form에서 필요한 값 가져오기
+        var rorderId = $(rorderId).val();
+        var orderDate = $(orderDateInput).val();
+        var customerId = $(customerIdInput).val();
+        var customerName = $(customerNameInput).val();
+        var productId = $(productIdInput).val();
+        var productName = $(productNameInput).val();
+        var orderCnt = $(orderCntInput).val();
+        var orderPrice = $(orderPriceInput).val();
+        var deliveryDate = $(deliveryDateInput).val();
+        console.log(requestUrl + 'orderDateInput:',orderDate);
+
+        //예측 버튼 비었는지 확인
+        if (deliveryDate == '')
+            alert("예측 버튼을 눌러주세요");
+        else {
+            // AJAX 요청 보내기
+            $.ajax({
+                url: requestUrl,
+                method: 'POST',
+                data: {
+                    rorderId: rorderId,
+                    orderDate: orderDate,
+                    customerId: customerId,
+                    customerName: customerName,
+                    productId: productId,
+                    productName: productName,
+                    orderCnt: orderCnt,
+                    orderPrice: orderPrice,
+                    deliveryDate: deliveryDate
+                },
+                success: function (response) {
+                    console.log('등록 통신결과');
+                    window.location.href = response.redirectUrl;
+                    console.log('orderDate:', orderDate);
+                    console.log('productId:', productId);
+                    console.log('orderCnt:', orderCnt);
+                    console.log('orderPrice:', orderPrice);
+                    console.log('deliveryDate:', deliveryDate);
+                },
+                error: function (error) {
+                    // 오류 처리
+                    console.error('-----------------AJAX 요청 실패:', error);
+                }
+            });
+        }
+    }
+</script>
+</body>
+</html>

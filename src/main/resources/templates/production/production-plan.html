@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Custom fonts for this template-->
+    <script src="https://kit.fontawesome.com/8d5fe92c5f.js" crossorigin="anonymous"></script>
+    <script th:inline="javascript">
+        // console.log([[${searchlist}]]);
+    </script>
+    <link
+            href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+            rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="/css/css.css" rel="stylesheet">
+    <title>생산 계획 현황</title>
+</head>
+
+
+<body id="page-top">
+
+<!-- Page Wrapper -->
+<div id="wrapper">
+
+    <!-- Sidebar -->
+    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+        <!-- Sidebar - Brand -->
+        <a class="sidebar-brand d-flex align-items-center justify-content-center" id="sidebarBrandTexts"
+           href="/main">
+            <div class="sidebar-brand-icons">
+                <i class="fa-solid fa-industry fa-2x" id="brandLogo"></i>
+            </div>
+            <div class="sidebar-brand-text mx-4">
+                <div class="sidebarBrandTexts">제1조 MES</div>
+            </div>
+        </a>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider my-3">
+
+        <!-- Nav Item - 수주관리 -->
+        <li class="nav-item">
+            <a class="nav-link" href="/rorder/order">
+                <i class="fa-solid fa-wallet"></i>
+                <span>수주관리</span></a>
+        </li>
+
+        <!-- Nav Item - 자재관리 -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOne"
+               aria-expanded="true" aria-controls="collapseOne">
+                <i class="fa-solid fa-pen-to-square"></i>
+                <span>자재관리</span>
+            </a>
+            <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <a class="collapse-item" href="/materials/material-inoutput">· 발주 현황</a>
+                    <a class="collapse-item" href="/materials/material-inventory">· 자재 입출 현황</a>
+                    <a class="collapse-item" href="/materials/porder-status">· 자재 재고 현황</a>
+                </div>
+            </div>
+        </li>
+
+        <!-- Nav Item - 생산관리 -->
+        <li class="nav-item active">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+               aria-expanded="true" aria-controls="collapseTwo">
+                <i class="fa-solid fa-clipboard"></i>
+                <span>생산관리</span>
+            </a>
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <a class="collapse-item" href="/production/production-plan">· 작업 계획 현황</a>
+                    <a class="collapse-item" href="/production/production-order">· 작업 지시 현황</a>
+                    <a class="collapse-item" href="/production/production-performance">· 작업 실적 현황</a>
+                </div>
+            </div>
+        </li>
+
+        <!-- Nav Item - 출하관리 -->
+        <li class="nav-item">
+            <a class="nav-link" href="/shipment/shipment">
+                <i class="fa-solid fa-chart-simple"></i>
+                <span>출하관리</span>
+            </a>
+        </li>
+
+        <!-- Nav Item - 거래처관리 -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThree"
+               aria-expanded="true" aria-controls="collapseThree">
+                <i class="fa-solid fa-user-group"></i>
+                <span>거래처관리</span>
+            </a>
+            <div id="collapseThree" class="collapse" aria-labelledby="HeadingThree" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <a class="collapse-item" href="/customer/rorder-customer">· 수주 거래처 현황</a>
+                    <a class="collapse-item" href="/customer/porder-customer">· 발주 거래처 현황</a>
+                </div>
+            </div>
+        </li>
+
+        <!-- Nav Item - 품목관리 -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFour"
+               aria-expanded="true" aria-controls="collapseFour">
+                <i class="fa-solid fa-chart-bar"></i>
+                <span>품목관리</span>
+            </a>
+            <div id="collapseFour" class="collapse" aria-labelledby="HeadingFour" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <a class="collapse-item" href="/item/product">· 제품 재고 현황</a>
+                    <a class="collapse-item" href="/item/bom">· BOM 현황</a>
+                </div>
+            </div>
+        </li>
+
+        <!-- Nav Item - 설비관리 -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFive"
+               aria-expanded="true" aria-controls="collapseFive">
+                <i class="fa-solid fa-gear"></i>
+                <span>설비관리</span>
+            </a>
+            <div id="collapseFive" class="collapse" aria-labelledby="HeadingFive" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <a class="collapse-item" href="/facility/facility-status">· 설비 현황</a>
+                    <a class="collapse-item" href="/facility/facility-information">· 설비 정보</a>
+                </div>
+            </div>
+        </li>
+
+        <!-- Nav Item - LOT 관리 -->
+        <li class="nav-item">
+            <a class="nav-link" href="/lot/lot">
+                <i class="fa-solid fa-repeat"></i>
+                <span>LOT 관리</span>
+            </a>
+        </li>
+
+        <!-- Sidebar Toggler (Sidebar) -->
+        <div class="text-center-toggle">
+            <button class="rounded-circle border-0" id="sidebarToggle"></button>
+        </div>
+
+    </ul>
+    <!-- End of Sidebar -->
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+        <!-- Main Content -->
+        <div id="content">
+
+            <!-- Topbar -->
+            <div class="topbar">
+                <h1 class="h4">생산관리 > 작업 계획 현황</h1>
+                <div class="buttons">
+                    <button class="buttonsEx" id="production-planDownloadExcel">엑셀다운로드</button>
+                </div>
+            </div>
+            <!-- End of Topbar -->
+
+            <!-- searchbar  -->
+            <form action="/production/plansearch" method="POST" class="searchbarForm">
+                <div class="searchbar">
+                    <table class="table table-borderless" id="productionDataTables1" cellspacing="0">
+                        <tr class="searchbarTr3">
+                            <td class="searchbarDateTd2">
+                                <p>품목</p>
+                            </td>
+                            <td class="searchbarContent2">
+                                <select name="id" class="searchbarSelect">
+                                    <option value="" selected></option>
+                                    <option th:each="plist : ${plist}" th:text="${plist.id}"
+                                            th:value="${plist.id}"></option>
+                                </select>
+                            </td>
+                            <td class="searchbarDateTd2">
+                                <p>수주번호</p>
+                            </td>
+                            <td class="searchbarContent2">
+                                <input type="text" name="orderId">
+                            </td>
+                            <td class="searchbarDateTd2">
+                                <p>상태</p>
+                            </td>
+                            <td class="searchbarContent2">
+                                <select class="searchbarSelect" name="state">
+                                    <option value="" selected></option>
+                                    <option>진행대기</option>
+                                    <option>진행중</option>
+                                    <option>완료</option>
+                                </select>
+                            </td>
+                            <td class="searchbarDateTd2">
+                                <p>계획 일자</p>
+                            </td>
+                            <td class="searchbarContent2">
+                                <div class="searchbarDate2">
+                                    <input type="date" name="min">
+                                    <p class="searchbarDateWater">~</p>
+                                    <input type="date" name="max">
+                                </div>
+                            </td>
+                            <td class="searchButtonTd">
+                                <button class="searchButton" type="submit">
+                                    <i class="fa-solid fa-magnifying-glass"></i>
+                                    <p class="searchButtonP">조회</p>
+                                </button>
+                            </td>
+                        </tr>
+
+                    </table>
+                </div>
+            </form>
+            <!-- searchbar끝 -->
+
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+
+                <!-- DataTales Example -->
+                <div class="cardBody">
+                    <div class="table-responsive" style="overflow: auto; max-height: 800px;">
+                        <table class="table table-borderless" id="productionDataTables2" width="100%" cellspacing="0">
+                            <thead class="tableTitle">
+                            <tr>
+                                <th>품목코드</th>
+                                <th>수주번호</th>
+                                <th>계획수량</th>
+                                <th>계획일자</th>
+                                <th>상태</th>
+                            </tr>
+                            </thead>
+                            <tbody class="tableBody">
+                            <tr th:each="wlist: ${wlist}">
+                                <td th:text="${wlist.productId}"></td>
+                                <td th:text="${wlist.orderId}"></td>
+                                <td th:text="${wlist.cnt}"></td>
+                                <td th:text="${#temporals.format(wlist.startDate, 'yyyy-MM-dd HH:mm')}"></td>
+                                <td th:text="${wlist.state}"></td>
+                            </tr>
+                            <tr th:each="wlist: ${searchlist}">
+                                <td th:text="${wlist.productId}"></td>
+                                <td th:text="${wlist.orderId}"></td>
+                                <td th:text="${wlist.cnt}"></td>
+                                <td th:text="${#temporals.format(wlist.startDate, 'yyyy-MM-dd HH:mm')}"></td>
+                                <td th:text="${wlist.state}"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!-- /.container-fluid -->
+        </div>
+        <!-- End of Main Content -->
+    </div>
+    <!-- End of Content Wrapper -->
+
+    <script src="/js/excel/production-planExcel.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+    <!-- Bootstrap core JavaScript-->
+    <script src="/js/reg.js"></script>
+    <!-- <script src="js/Cor.js"></script> -->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="/js/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="/js/sb-admin-2.min.js"></script>
+
+    <!-- Page level plugins -->
+    <script src="/js/Chart.min.js"></script>
+
+</div>
+</body>
+</html>

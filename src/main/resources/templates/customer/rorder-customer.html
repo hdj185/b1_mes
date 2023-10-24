@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <!-- Custom fonts for this template-->
+    <script src="https://kit.fontawesome.com/8d5fe92c5f.js" crossorigin="anonymous"></script>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+          rel="stylesheet">
+    <!-- Custom styles for this template-->
+    <link href="/css/css.css" rel="stylesheet">
+    <title>수주 거래처 현황</title>
+</head>
+
+<body id="page-top">
+
+<!-- Page Wrapper -->
+<div id="wrapper">
+
+    <!-- Sidebar -->
+    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+        <!-- Sidebar - Brand -->
+        <a class="sidebar-brand d-flex align-items-center justify-content-center" id="sidebarBrandTexts"
+           href="/main">
+            <div class="sidebar-brand-icons">
+                <i class="fa-solid fa-industry fa-2x" id="brandLogo"></i>
+            </div>
+            <div class="sidebar-brand-text mx-4">
+                <div class="sidebarBrandTexts">제1조 MES</div>
+            </div>
+        </a>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider my-3">
+
+        <!-- Nav Item - 수주관리 -->
+        <li class="nav-item">
+            <a class="nav-link" href="/rorder/order">
+                <i class="fa-solid fa-wallet"></i>
+                <span>수주관리</span></a>
+        </li>
+
+        <!-- Nav Item - 자재관리 -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOne"
+               aria-expanded="true" aria-controls="collapseOne">
+                <i class="fa-solid fa-pen-to-square"></i>
+                <span>자재관리</span>
+            </a>
+            <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <a class="collapse-item" href="/materials/porder-status">· 발주 현황</a>
+                    <a class="collapse-item" href="/materials/material-inoutput">· 자재 입·출 현황</a>
+                    <a class="collapse-item" href="/materials/material-inventory">· 자재 재고 현황</a>
+                </div>
+            </div>
+        </li>
+
+        <!-- Nav Item - 생산관리 -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+               aria-expanded="true" aria-controls="collapseTwo">
+                <i class="fa-solid fa-clipboard"></i>
+                <span>생산관리</span>
+            </a>
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <a class="collapse-item" href="/production/production-plan">· 작업 계획 현황</a>
+                    <a class="collapse-item" href="/production/production-order">· 작업 지시 현황</a>
+                    <a class="collapse-item" href="/production/production-performance">· 작업 실적 현황</a>
+                </div>
+            </div>
+        </li>
+
+        <!-- Nav Item - 출하관리 -->
+        <li class="nav-item">
+            <a class="nav-link" href="/shipment/shipment">
+                <i class="fa-solid fa-chart-simple"></i>
+                <span>출하관리</span>
+            </a>
+        </li>
+
+        <!-- Nav Item - 거래처관리 -->
+        <li class="nav-item active">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThree"
+               aria-expanded="true" aria-controls="collapseThree">
+                <i class="fa-solid fa-user-group"></i>
+                <span>거래처관리</span>
+            </a>
+            <div id="collapseThree" class="collapse" aria-labelledby="HeadingThree" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <a class="collapse-item" href="/customer/rorder-customer">· 수주 거래처 현황</a>
+                    <a class="collapse-item" href="/customer/porder-customer">· 발주 거래처 현황</a>
+                </div>
+            </div>
+        </li>
+
+        <!-- Nav Item - 품목관리 -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFour"
+               aria-expanded="true" aria-controls="collapseFour">
+                <i class="fa-solid fa-chart-bar"></i>
+                <span>품목관리</span>
+            </a>
+            <div id="collapseFour" class="collapse" aria-labelledby="HeadingFour" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <a class="collapse-item" href="/item/product">· 제품 재고 현황</a>
+                    <a class="collapse-item" href="/item/bom">· BOM 현황</a>
+                </div>
+            </div>
+        </li>
+
+        <!-- Nav Item - 설비관리 -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFive"
+               aria-expanded="true" aria-controls="collapseFive">
+                <i class="fa-solid fa-gear"></i>
+                <span>설비관리</span>
+            </a>
+            <div id="collapseFive" class="collapse" aria-labelledby="HeadingFive" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <a class="collapse-item" href="/facility/facility-status">· 설비 현황</a>
+                    <a class="collapse-item" href="/facility/facility-information">· 설비 정보</a>
+                </div>
+            </div>
+        </li>
+
+        <!-- Nav Item - LOT 관리 -->
+        <li class="nav-item">
+            <a class="nav-link" href="/lot/lot">
+                <i class="fa-solid fa-repeat"></i>
+                <span>LOT 관리</span>
+            </a>
+        </li>
+
+        <!-- Sidebar Toggler (Sidebar) -->
+        <div class="text-center-toggle">
+            <button class="rounded-circle border-0" id="sidebarToggle"></button>
+        </div>
+
+    </ul>
+    <!-- End of Sidebar -->
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+        <!-- Main Content -->
+        <div id="content">
+
+            <!-- Topbar -->
+            <div class="topbar">
+                <h1 class="h4">거래처 관리 > 수주 거래처 현황</h1>
+                <div class="buttons">
+                    <!-- 등록 -->
+                    <button class="buttonsReg" id="customerRegBtn">등록</button>
+                    <div class="modal" id="customerRegModal">
+                        <div class="customerModalContentReg">
+                            <div class="regTop">
+                                <p class="regTitle">수주 거래처 등록</p>
+                            </div>
+                            <!-- regSearchbar -->
+                            <form action="/customer/rcustomer-insert" method="post">
+                                <div class="regSearchbar">
+                                    <table class="table table-borderless" id="customerDataTable1" width="100%"
+                                           cellspacing="0">
+                                        <tr class="customerRegSearchbarTr1">
+                                            <td class="customerRegSearchbarDateTd">
+                                                <p>업체명</p>
+                                            </td>
+                                            <td class="customerRegSearchbarDateContent">
+                                                <input type="text" name="name">
+                                            </td>
+                                            <td class="customerRegSearchbarDateTd">
+                                                <p>팩스번호</p>
+                                            </td>
+                                            <td class="customerRegSearchbarDateContent">
+                                                <input type="text" name="fax">
+                                            </td>
+                                            <td class="customerRegSearchbarDateTd">
+                                                <p>사업자번호</p>
+                                            </td>
+                                            <td class="customerRegSearchbarDateContent">
+                                                <input type="text" name="businessNumber">
+                                            </td>
+                                        </tr>
+                                        <tr class="customerRegSearchbarTr2">
+                                            <td class="customerRegSearchbarDateTd">
+                                                <p>연락처</p>
+                                            </td>
+                                            <td class="customerRegSearchbarDateContent">
+                                                <input type="text" name="tel">
+                                            </td>
+                                            <td class="customerRegSearchbarDateTd">
+                                                <!-- 공백 -->
+                                            </td>
+                                            <td class="customerRegSearchbarDateContent">
+                                                <!-- 공백 -->
+                                            </td>
+                                            <td class="customerRegSearchbarDateTd">
+                                                <!-- 공백 -->
+                                            </td>
+                                            <td class="customerRegSearchbarDateContent">
+                                                <!-- 공백 -->
+                                            </td>
+                                        </tr>
+                                        <tr class="customerRegSearchbarTr3">
+                                            <td class="customerRegSearchbarDateTd2">
+                                                <p>사업장<br>소재지</p>
+                                            </td>
+                                            <td class="customerRegSearchbarDateContent2">
+                                                <input type="text" id="sample6_postcode" class="customerInput1"
+                                                       placeholder="우편번호" readonly/>
+                                                <button type="button" class="customerInput1Button"
+                                                        onclick="findAddr();">
+                                                    <i class="fa-solid fa-magnifying-glass fa-lg"
+                                                       style="color: #ffffff"></i>
+                                                </button>
+                                                <input type="text" id="sample6_address" name="sample6_address"
+                                                       class="customerInput2" placeholder="도로명 주소" readonly/>
+                                                <input type="text" id="sample6_detailAddress"
+                                                       name="sample6_detailAddress" class="customerInput3"
+                                                       placeholder="상세 주소">
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <div class="stockRegButton">
+                                        <button type="submit" class="stockRegReg">저장</button>
+                                        <button type="button" class="customerRegClose">닫기</button>
+                                    </div>
+                                </div>
+                            </form>
+                            <!-- regSearchbar 끝 -->
+                        </div>
+                    </div>
+                    <!-- 등록 끝 -->
+                </div>
+            </div>
+            <!-- End of Topbar -->
+
+            <!-- searchbar  -->
+            <form action="/customer/rordersearch" method="post" class="searchbarForm">
+                <div class="searchbar">
+                    <table class="table table-borderless" id="dataTable" cellspacing="0">
+                        <tr class="searchbarTr3">
+                            <td class="searchbarDateTd">
+                                <p>업체</p>
+                            </td>
+                            <td class="searchbarContent">
+                                <input type="text" name="name">
+                            </td>
+                            <td class="searchbarDateTd">
+                                <p>업체코드</p>
+                            </td>
+                            <td class="searchbarContent">
+                                <input type="text" name="id">
+                            </td>
+                            <td class="searchbarDateTd">
+                                <p>사업자등록번호</p>
+                            </td>
+                            <td class="searchbarContent">
+                                <input type="text" name="businessNumber">
+                            </td>
+                            <td class="searchButtonTd">
+                                <button class="searchButton">
+                                    <i class="fa-solid fa-magnifying-glass"></i>
+                                    <p class="searchButtonP">조회</p>
+                                </button>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </form>
+            <!-- searchbar끝 -->
+
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+
+                <!-- DataTales Example -->
+                <div class="cardBody">
+                    <div class="table-responsive" style="overflow: auto; max-height: 800px;">
+                        <table class="table table-borderless" id="dataTables" width="100%" cellspacing="0">
+                            <thead class="tableTitle">
+                            <tr>
+                                <th>업체명</th>
+                                <th>업체코드</th>
+                                <th>팩스번호</th>
+                                <th>연락처</th>
+                                <th>소재지</th>
+                                <th>사업자등록번호</th>
+                            </tr>
+                            </thead>
+                            <tbody class="tableBody">
+                            <tr th:each="clist:${clist}">
+                                <td th:text="${clist.name}"></td>
+                                <td th:text="${clist.id}"></td>
+                                <td th:text="${clist.fax}"></td>
+                                <td th:text="${clist.tel}"></td>
+                                <td th:text="${clist.address}"></td>
+                                <td th:text="${clist.businessNumber}"></td>
+                            </tr>
+                            <tr th:each="clist:${slist}">
+                                <td th:text="${clist.name}"></td>
+                                <td th:text="${clist.id}"></td>
+                                <td th:text="${clist.fax}"></td>
+                                <td th:text="${clist.tel}"></td>
+                                <td th:text="${clist.address}"></td>
+                                <td th:text="${clist.businessNumber}"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!-- /.container-fluid -->
+        </div>
+        <!-- End of Main Content -->
+    </div>
+    <!-- End of Content Wrapper -->
+
+    <!-- 작성 스크립트-->
+    <script src="/js/buttons/customerRegistration.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="/js/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="/js/sb-admin-2.min.js"></script>
+
+    <!-- Page level plugins -->
+    <script src="/js/Chart.min.js"></script>
+
+</div>
+</body>
+</html>
